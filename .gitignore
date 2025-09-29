@@ -1,0 +1,33 @@
+# dependencies
+node_modules/
+packages/**/node_modules/
+
+# next / build
+.next/
+out/
+dist/
+*.log
+
+# cache
+.pnp.*
+.pnpm-debug.log
+.npmrc
+.cache/
+.turbo/
+.vercel/
+firebase-debug.log
+.firebaserc.local
+
+# env
+.env
+.env.*
+!.env.example
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# misc
+coverage/

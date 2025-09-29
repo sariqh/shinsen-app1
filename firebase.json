@@ -1,0 +1,27 @@
+{
+  "functions": {
+    "source": "packages/functions"
+  },
+  "emulators": {
+    "functions": {
+      "host": "127.0.0.1",
+      "port": 5001,
+      "region": "us-central1"
+    },
+    "firestore": {
+      "host": "127.0.0.1",
+      "port": 8080
+    },
+    "ui": {
+      "host": "127.0.0.1",
+      "port": 4000
+    },
+    "hub": {
+      "host": "127.0.0.1",
+      "port": 4400
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@shinsen/web",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.51.0",
+    "dexie": "^4.0.8",
+    "firebase": "^10.12.0",
+    "framer-motion": "^11.0.0",
+    "lucide-react": "^0.441.0",
+    "next": "14.2.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-hook-form": "^7.53.0",
+    "react-virtuoso": "^4.7.10",
+    "react-zoom-pan-pinch": "^3.1.0",
+    "zod": "^3.23.8",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.14",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.5",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.10",
+    "typescript": "^5.4.5"
+  }
+}

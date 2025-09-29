@@ -1,0 +1,77 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ---- Helpers ----
+    function isSignedIn() { return request.auth != null; }
+    function isOwner(uid) { return isSignedIn() && request.auth.uid == uid; }
+
+    // Notes string length guard (<= 2000) for composition slot notes
+    function validNotes(notes) {
+      return notes is map
+        && (!('attr' in notes) || (notes.attr is string && notes.attr.size() <= 2000))
+        && (!('equipSkill' in notes) || (notes.equipSkill is string && notes.equipSkill.size() <= 2000))
+        && (!('memo' in notes) || (notes.memo is string && notes.memo.size() <= 2000));
+    }
+
+    function validCompositionSlot(slot) {
+      return slot is map
+        && ('warlordId' in slot && slot.warlordId is string)
+        && ('camp' in slot && slot.camp is number && slot.camp >= 1 && slot.camp <= 4)
+        && (!('skillIds' in slot) || (slot.skillIds is list && slot.skillIds.size() <= 2))
+        && (!('tacticIds' in slot) || (slot.tacticIds is list && slot.tacticIds.size() <= 3))
+        && (!('notes' in slot) || validNotes(slot.notes));
+    }
+
+    function validComposition(data, uid) {
+      return data is map
+        && ('userId' in data && data.userId is string && data.userId == uid)
+        && ('unitType' in data && data.unitType is number && data.unitType >= 1 && data.unitType <= 5)
+        && ('slots' in data && data.slots is list && data.slots.size() <= 3)
+        && (!('warlordIdsFlat' in data) || (data.warlordIdsFlat is list && data.warlordIdsFlat.size() <= 3))
+        && (!('skillIdsFlat' in data) || (data.skillIdsFlat is list && data.skillIdsFlat.size() <= 6))
+        && (!('name' in data) || data.name is string)
+        && (!('createdAt' in data) || data.createdAt is timestamp)
+        && ('updatedAt' in data && data.updatedAt is timestamp)
+        ;
+    }
+
+    // ---- Master: read-only ----
+    match /master/{coll}/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // ---- Users root ----
+    match /users/{uid} {
+      // User doc itself: allow read/write to owner only
+      allow read, write: if isOwner(uid);
+
+      // Assets (sparse maps). Owner only.
+      match /assets/{assetId} {
+        allow read, write: if isOwner(uid);
+      }
+
+      // Compositions
+      match /compositions/{compositionId} {
+        allow read: if isOwner(uid);
+        allow create: if isOwner(uid)
+          && validComposition(request.resource.data, uid);
+        allow update: if isOwner(uid)
+          && validComposition(request.resource.data, uid)
+          // updatedAt must move forward (server-side stronger check also recommended)
+          && (resource == null || request.resource.data.updatedAt > resource.data.updatedAt);
+        allow delete: if isOwner(uid);
+      }
+
+      // Workspace (view placement only; not view state)
+      match /workspace/{docId} {
+        allow read, write: if isOwner(uid)
+          && request.resource.data is map
+          && ('freeAreaCompositionIds' in request.resource.data ? (request.resource.data.freeAreaCompositionIds is list && request.resource.data.freeAreaCompositionIds.size() <= 10) : true)
+          && ('constraintAreaCompositionIds' in request.resource.data ? (request.resource.data.constraintAreaCompositionIds is list && request.resource.data.constraintAreaCompositionIds.size() <= 5) : true)
+          && (!('createdAt' in request.resource.data) || request.resource.data.createdAt is timestamp)
+          && (!('updatedAt' in request.resource.data) || request.resource.data.updatedAt is timestamp);
+      }
+    }
+  }
+}
