@@ -137,7 +137,7 @@ Last-Updated: 2025-09-25
 ## 11. 参考ファイル配置（例）
 ```
 app/
-  (builder)/builder/page.tsx
+  (composition)/composition/page.tsx
   (assets)/assets/page.tsx
   (mypage)/page.tsx
 src/

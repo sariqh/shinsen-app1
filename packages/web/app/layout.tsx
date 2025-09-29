@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <a className="font-bold" href="/">Shinsen</a>
                 <a className="text-sm" href="/compose">編成</a>
                 <a className="text-sm" href="/assets">図鑑</a>
-                <a className="text-sm" href="/my">マイページ</a>
+                <a className="text-sm" href="/mypage">マイページ</a>
               </nav>
             </header>
             <main className="flex-1">{children}</main>
