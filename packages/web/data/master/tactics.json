@@ -1,2 +1,86 @@
-[]
-
+[
+  {
+    "tacticId": "t_001",
+    "name": "一気呵成",
+    "category": 1,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "tacticId": "t_002",
+    "name": "臥薪嘗胆",
+    "category": 1,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "tacticId": "t_003",
+    "name": "示形",
+    "category": 2,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "tacticId": "t_004",
+    "name": "無備",
+    "category": 2,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "tacticId": "t_005",
+    "name": "治気",
+    "category": 3,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "tacticId": "t_006",
+    "name": "治力",
+    "category": 3,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "tacticId": "t_007",
+    "name": "圮地",
+    "category": 4,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "tacticId": "t_008",
+    "name": "軽地",
+    "category": 4,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "tacticId": "t_009",
+    "name": "五事",
+    "category": 5,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "tacticId": "t_010",
+    "name": "七計",
+    "category": 5,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "tacticId": "t_011",
+    "name": "間諜",
+    "category": 6,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "tacticId": "t_012",
+    "name": "生間",
+    "category": 6,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  }
+]

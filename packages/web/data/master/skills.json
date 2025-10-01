@@ -1,2 +1,98 @@
-[]
-
+[
+  {
+    "skillId": "s_001",
+    "numericId": 1,
+    "name": "義心昭烈",
+    "rarity": 1,
+    "type": 1,
+    "displayGroup": 1,
+    "inheritedSkill": false,
+    "useLimit": 1,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "skillId": "s_002",
+    "numericId": 2,
+    "name": "青州兵",
+    "rarity": 1,
+    "type": 2,
+    "displayGroup": 2,
+    "inheritedSkill": true,
+    "useLimit": 1,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "skillId": "s_003",
+    "numericId": 3,
+    "name": "反計之策",
+    "rarity": 1,
+    "type": 2,
+    "displayGroup": 3,
+    "inheritedSkill": true,
+    "useLimit": 1,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "skillId": "s_004",
+    "numericId": 4,
+    "name": "草船借箭",
+    "rarity": 2,
+    "type": 2,
+    "displayGroup": 4,
+    "inheritedSkill": true,
+    "useLimit": 1,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "skillId": "s_005",
+    "numericId": 5,
+    "name": "一騎当千",
+    "rarity": 1,
+    "type": 3,
+    "displayGroup": 5,
+    "inheritedSkill": true,
+    "useLimit": 1,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "skillId": "s_006",
+    "numericId": 6,
+    "name": "渾水摸魚",
+    "rarity": 2,
+    "type": 4,
+    "displayGroup": 6,
+    "inheritedSkill": true,
+    "useLimit": 1,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "skillId": "s_007",
+    "numericId": 7,
+    "name": "擅攻",
+    "rarity": 2,
+    "type": 5,
+    "displayGroup": 7,
+    "inheritedSkill": false,
+    "useLimit": 1,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "skillId": "s_008",
+    "numericId": 8,
+    "name": "八門金鎖の陣",
+    "rarity": 1,
+    "type": 6,
+    "displayGroup": 8,
+    "inheritedSkill": true,
+    "useLimit": 1,
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  }
+]
