@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="min-h-screen flex flex-col">
             <header className="border-b px-4 py-2">
               <nav className="max-w-6xl mx-auto flex items-center gap-4">
-                <a className="font-bold" href="/">Shinsen</a>
+                <a className="font-bold" href="/">真戦編成アプリ（仮）</a>
                 <a className="text-sm" href="/composition">編成</a>
                 <a className="text-sm" href="/assets">図鑑</a>
                 <a className="text-sm" href="/mypage">マイページ</a>

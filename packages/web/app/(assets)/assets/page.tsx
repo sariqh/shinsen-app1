@@ -87,7 +87,7 @@ export default function AssetsPage() {
   return (
     <div className="max-w-6xl mx-auto p-4 space-y-4" aria-label="assets-page">
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">図鑑（所持）</h1>
+        <h1 className="text-xl font-semibold">図鑑（所有状況）</h1>
         <div className="flex gap-2" role="tablist" aria-label="assets-tabs">
           <button role="tab" aria-selected={tab==="warlord"} className={`px-3 py-1.5 text-sm border rounded ${tab==="warlord"?"bg-gray-100":""}`} onClick={()=>setTab("warlord")}>武将</button>
           <button role="tab" aria-selected={tab==="skill"} className={`px-3 py-1.5 text-sm border rounded ${tab==="skill"?"bg-gray-100":""}`} onClick={()=>setTab("skill")}>戦法</button>

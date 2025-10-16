@@ -27,16 +27,47 @@ type Props = {
   ownedWarlords?: Record<string, number>; // warlordId -> 所持枚数
   activeSlotIndex?: Index3; // 親から受け取る
   onSelectSlot: (i: Index3) => void;
-  onSwapSlots?: (targetIndex: Index3) => void; // 参照: 03/3.4 - スロット間スワップ
   onClearSlot?: (i: Index3) => void; // 参照: 03/3.5 - スロットクリア
+  activeSkillIndex?: 0 | 1;
+  onSelectSkillSlot?: (slotIndex: Index3, skillIndex: 0 | 1) => void;
+  skillById?: Record<string, { name: string }>; // 戦法名表示用
+  onEditTitle?: () => void; // 編成名編集
+  isCompositionActive?: boolean; // 編成スロット全体がアクティブか
+  onSelectComposition?: () => void; // 編成スロット選択
 };
 
-export function CompositionCard({ title, composition, warlordById, ownedWarlords = {}, activeSlotIndex, onSelectSlot, onSwapSlots, onClearSlot }: Props) {
+
+
+export function CompositionCard({ title, composition, warlordById, ownedWarlords = {}, activeSlotIndex, onSelectSlot, onClearSlot, activeSkillIndex, onSelectSkillSlot, skillById = {}, onEditTitle, isCompositionActive = false, onSelectComposition }: Props) {
 
   return (
-    <div className="min-w-[480px] bg-white border-2 border-gray-300 rounded-lg shadow-md">
-      <div className="px-3 py-2 border-b-2 border-gray-300 text-sm font-semibold bg-gray-50">{title}</div>
-      <div className="p-2">
+    <div className={`w-full bg-white border border-gray-300 rounded shadow-sm ${isCompositionActive ? "ring-2 ring-yellow-400" : ""}`}>
+      <div className="px-2 py-1 border-b border-gray-300 text-xs font-semibold bg-gray-50 flex items-center justify-between">
+        <button
+          className="flex-1 text-left hover:bg-gray-100 px-1 py-0.5 rounded transition-colors"
+          onClick={(e) => {
+            e.stopPropagation();
+            onSelectComposition?.();
+          }}
+        >
+          {title}
+        </button>
+        {onEditTitle && (
+          <button
+            className="ml-2 p-1 hover:bg-gray-200 rounded transition-colors"
+            onClick={(e) => {
+              e.stopPropagation();
+              onEditTitle();
+            }}
+            aria-label="編成名を編集"
+          >
+            <svg className="w-3 h-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+          </button>
+        )}
+      </div>
+      <div className="p-1">
         <div className="grid grid-cols-3 gap-0">
           {[0, 1, 2].map((i) => {
             const idx = i as Index3;
@@ -58,21 +89,22 @@ export function CompositionCard({ title, composition, warlordById, ownedWarlords
             }
             
             return (
-              <div key={idx} className="flex flex-col border-r border-gray-300 last:border-r-0">
+              <div key={idx} className={`flex flex-col ${idx < 2 ? "border-r border-gray-300" : ""}`}>
                 {/* 武将スロット */}
                 <div className="relative border-b border-gray-300">
                   <button
-                    className={`h-14 w-full px-2 flex items-center justify-center text-sm font-medium truncate transition-all ${bgClass} ${textColorClass} ${
-                      isActive ? "ring-4 ring-inset ring-yellow-400 brightness-110 scale-[0.98]" : ""
+                    className={`h-5 w-[5ch] mx-auto px-0.5 flex items-center justify-center text-[10px] font-medium truncate transition-all ${bgClass} ${textColorClass} ${
+                      isActive ? "ring-2 ring-inset ring-yellow-400 brightness-110" : ""
                     }`}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       // 通常のアクティブ化のみ（スワップは行わない）
                       onSelectSlot(idx);
                     }}
                     aria-pressed={isActive}
                     title={warlord?.name || `武将${idx + 1}`}
                   >
-                    <span className="block w-full text-center">
+                    <span className="block w-full text-center text-[10px] leading-tight">
                       {warlord?.name || `武将${idx + 1}`}
                     </span>
                   </button>
@@ -80,7 +112,7 @@ export function CompositionCard({ title, composition, warlordById, ownedWarlords
                   {/* クリアボタン（武将スロットの右上） */}
                   {warlord && onClearSlot && (
                     <button
-                      className="absolute top-0.5 right-0.5 w-6 h-6 bg-red-500 text-white text-sm flex items-center justify-center hover:bg-red-600 font-bold rounded shadow-sm z-10"
+                      className="absolute top-0.5 right-0.5 w-5 h-5 bg-red-500 text-white text-xs flex items-center justify-center hover:bg-red-600 font-bold rounded shadow-sm z-10"
                       onClick={(e) => {
                         e.stopPropagation();
                         onClearSlot(idx);
@@ -92,32 +124,40 @@ export function CompositionCard({ title, composition, warlordById, ownedWarlords
                   )}
                 </div>
                 
-                {/* 戦法スロット x2 */}
-                <div className="grid grid-cols-2 gap-0 border-b border-gray-300">
+                {/* 戦法スロット x2（縦並び） */}
+                <div className="flex flex-col border-b border-gray-300">
                   {[0, 1].map((k) => (
-                    <div
+                    <button
                       key={k}
-                      className={`h-11 flex items-center justify-center text-xs bg-gray-50 text-gray-400 px-1 ${
-                        k === 0 ? "border-r border-gray-300" : ""
-                      }`}
-                      aria-disabled
+                      className={`h-4 w-[6ch] mx-auto flex items-center justify-center text-[9px] px-0.5 transition-colors ${
+                        activeSlotIndex === idx && activeSkillIndex === (k as 0|1) ? "bg-yellow-100 text-gray-800" : "bg-gray-50 text-gray-400"
+                      } ${k === 0 ? "border-b border-gray-300" : ""}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelectSkillSlot?.(idx, k as 0 | 1);
+                      }}
+                      aria-pressed={activeSlotIndex === idx && activeSkillIndex === (k as 0|1)}
                     >
-                      <span className="truncate">戦法{k + 1}</span>
-                    </div>
+                      <span className="truncate">
+                        {slot?.skillIds?.[k] && skillById[slot.skillIds[k]] 
+                          ? skillById[slot.skillIds[k]].name 
+                          : `戦法${k + 1}`}
+                      </span>
+                    </button>
                   ))}
                 </div>
                 
-                {/* 兵法書スロット x3（縦並び） */}
-                <div className="flex flex-col">
+                {/* 兵法書スロット x3（横並び） */}
+                <div className="grid grid-cols-3 gap-0">
                   {[0, 1, 2].map((k) => (
                     <div
                       key={k}
-                      className={`h-9 flex items-center justify-center text-xs bg-gray-50 text-gray-400 px-1 ${
-                        k < 2 ? "border-b border-gray-300" : ""
+                      className={`h-3.5 w-[3ch] mx-auto flex items-center justify-center text-[9px] bg-gray-50 text-gray-400 px-0.5 ${
+                        k < 2 ? "border-r border-gray-300" : ""
                       }`}
                       aria-disabled
                     >
-                      <span className="truncate">兵法{k + 1}</span>
+                      <span className="truncate">兵</span>
                     </div>
                   ))}
                 </div>

@@ -1,4 +1,5 @@
 import type { Warlord } from "@/src/schema/warlord";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 type Camp = 0 | 1 | 2 | 3; // 0:魏 1:呉 2:蜀 3:群 — 内部の数値Enum(1..4)とは異なるインデックス
 
@@ -32,63 +33,101 @@ export function WarlordPalette({ warlords, onPick, ownedWarlords = {} }: Props) 
     warlords.filter((w) => CAMP_ENUM_TO_INDEX[w.camp] === campIndex)
   );
 
-  const maxRows = Math.max(...byCamp.map((c) => c.length));
+  // 転置レイアウト: 左端に陣営ヘッダ、右側に7列までの武将を横並びにし、あふれたら段を増やす
+  const MAX_COLS = 7; // 武将は1行最大7
 
   return (
-    <div className="h-full overflow-auto p-1">
-      <div
-        className="grid gap-[2px]"
-        style={{
-          gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-          gridTemplateRows: `20px repeat(${maxRows}, 32px)`, // 行間を詰めて同時表示数を増加
-        }}
-        aria-label="warlord-palette"
+    <div className="w-full h-full">
+      <TransformWrapper
+        minScale={0.75}
+        maxScale={1.25}
+        initialScale={1}
+        wheel={{ disabled: true }}
+        doubleClick={{ disabled: true }}
+        panning={{ disabled: false }}
+        limitToBounds={false}
+        centerOnInit={false}
+        disablePadding={true}
       >
-        {/* ヘッダー行（陣営名） */}
-        {CAMP_LABELS.map((label, i) => (
-          <div key={`hdr-${label}`} style={{ gridColumn: i + 1, gridRow: 1 }}>
-            <div
-              className={`h-[20px] flex items-center justify-center text-[11px] font-medium ${
-                BG_CLASSES[i as Camp][5]
-              } ${i === 3 ? "text-black" : "text-white"}`}
-            >
-              {label}
-            </div>
-          </div>
-        ))}
-
-        {/* 武将セル */}
-        {byCamp.map((campWarlords, campIndex) =>
-          campWarlords.map((warlord, rowIndex) => {
-            // 参照: 06/3.2.2 - 疎Map（未所持はキー無し）
-            const owned = ownedWarlords[warlord.id] !== undefined;
-            const copies = ownedWarlords[warlord.id] || 0;
-            // 参照: 06/3.2.2 - 凸（limit_break）は所持枚数から算出: min(5, max(0, copies - 1))
-            const limitBreak = Math.min(5, Math.max(0, copies - 1));
-
-            return (
-              <button
-                key={`c${campIndex}-r${rowIndex}`}
-                style={{ gridColumn: campIndex + 1, gridRow: rowIndex + 2 }}
-                className={`relative border rounded flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-blue-400 transition-all ${
-                  owned ? BG_CLASSES[campIndex as Camp][limitBreak] : "bg-white"
-                }`}
-                onClick={() => onPick(warlord.id)}
-                aria-label={`${warlord.name}${owned ? `（${limitBreak}凸）` : "（未所持）"}を選択`}
+        {() => (
+          <TransformComponent
+            wrapperStyle={{ width: "100%", height: "100%" }}
+            contentStyle={{ width: "max-content", height: "max-content" }}
+          >
+            <div className="py-2 px-1">
+              <div className="grid gap-[4px]" aria-label="warlord-palette"
+                style={{ gridTemplateColumns: `2ch repeat(${MAX_COLS}, 5ch)` }}
               >
-                <span
-                  className={`text-[12px] leading-none truncate max-w-[90%] ${
-                    owned ? textClass(campIndex as Camp, limitBreak) : "text-gray-400"
-                  }`}
-                  title={`${warlord.name}${owned ? ` (${limitBreak}凸)` : " (未所持)"}`}
-                >
-                  {warlord.name}
-                </span>
-              </button>
-            );
-          })
+                {byCamp.map((campWarlords, campIndex) => {
+                  const rows = Math.max(1, Math.ceil(campWarlords.length / MAX_COLS));
+                  const chunks: typeof campWarlords[] = [];
+                  for (let r = 0; r < rows; r++) {
+                    chunks.push(campWarlords.slice(r * MAX_COLS, r * MAX_COLS + MAX_COLS));
+                  }
+
+                  return (
+                    <>
+                      {chunks.map((chunk, rowIdx) => (
+                        <>
+                          {/* 左端：陣営ヘッダ（最初の段のみ表示） */}
+                          <div key={`hdr-${campIndex}-${rowIdx}`} className="flex items-center justify-center">
+                            {rowIdx === 0 ? (
+                              <div
+                                className={`h-[20px] flex items-center justify-center text-[11px] font-medium rounded ${
+                                  BG_CLASSES[campIndex as Camp][5]
+                                } ${campIndex === 3 ? "text-black" : "text-white"}`}
+                                style={{ width: "2ch" }}
+                              >
+                                {CAMP_LABELS[campIndex]}
+                              </div>
+                            ) : (
+                              <div className="h-[20px]" />
+                            )}
+                          </div>
+
+                          {/* 右側：武将 7 列まで */}
+                          {Array.from({ length: MAX_COLS }).map((_, col) => {
+                            const warlord = chunk[col];
+                            if (!warlord) {
+                              return <div key={`empty-${campIndex}-${rowIdx}-${col}`} className="h-[20px]" />;
+                            }
+
+                            const owned = ownedWarlords[warlord.id] !== undefined;
+                            const copies = ownedWarlords[warlord.id] || 0;
+                            const limitBreak = Math.min(5, Math.max(0, copies - 1));
+                            const textColor = owned ? textClass(campIndex as Camp, limitBreak) : "text-gray-400";
+                            const bg = owned ? BG_CLASSES[campIndex as Camp][limitBreak] : "bg-white";
+                            const name = warlord.name;
+                            const fontSize = name.length >= 5 ? 10 : 12; // 5文字以上は縮小
+
+                            return (
+                              <button
+                                key={`cell-${campIndex}-${rowIdx}-${col}`}
+                                className={`relative border rounded flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-blue-400 transition-all ${bg}`}
+                                style={{ height: 20 }}
+                                onClick={() => onPick(warlord.id)}
+                                aria-label={`${name}${owned ? `（${limitBreak}凸）` : "（未所持）"}を選択`}
+                              >
+                                <span
+                                  className={`leading-none ${textColor}`}
+                                  style={{ width: "5ch", fontSize, textAlign: "center", whiteSpace: "nowrap", overflow: "hidden" }}
+                                  title={`${name}${owned ? ` (${limitBreak}凸)` : " (未所持)"}`}
+                                >
+                                  {name}
+                                </span>
+                              </button>
+                            );
+                          })}
+                        </>
+                      ))}
+                    </>
+                  );
+                })}
+              </div>
+            </div>
+          </TransformComponent>
         )}
-      </div>
+      </TransformWrapper>
     </div>
   );
 }
