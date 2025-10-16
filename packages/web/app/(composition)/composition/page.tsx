@@ -9,9 +9,11 @@ import { CompositionBoard } from "@/src/ui/composition/CompositionBoard";
 import { PaletteTabs } from "@/src/ui/palette/PaletteTabs";
 import { WarlordPalette } from "@/src/ui/palette/WarlordPalette";
 import { SkillPalette } from "@/src/ui/palette/SkillPalette";
+import { TacticsPalette } from "@/src/ui/palette/TacticsPalette";
 // 現実データ（開発用バイパス）: TypeScriptファイルからimport（参照: 07/3）
 import { skillsMaster } from "@/src/data/skills";
 import { assetsData } from "@/src/data/assets";
+import { tacticsMaster } from "@/src/data/tactics";
 
 type Index3 = 0 | 1 | 2;
 type CompositionIndex = 0 | 1 | 2;
@@ -54,6 +56,14 @@ const SKILL_LIST_FOR_PALETTE: { id: string; name: string; type: string; owned: b
   owned: OWNED_SKILLS_SET[s.skillId] === true,
 }));
 
+// 兵法書マスタから表示用データを生成
+type TacticMasterItem = (typeof tacticsMaster)[number];
+const TACTICS_LIST_FOR_PALETTE: { id: string; name: string; category: number }[] = (tacticsMaster as readonly TacticMasterItem[]).map((t) => ({
+  id: t.tacticId,
+  name: t.name,
+  category: t.category,
+}));
+
 export default function CompositionPage() {
   const [tab, setTab] = useState<"warlord" | "skill" | "tactics">("warlord");
   const { data: warlords = [] } = useQuery({ queryKey: ["warlords"], queryFn: getWarlords });
@@ -67,6 +77,15 @@ export default function CompositionPage() {
     const m: Record<string, { name: string }> = {};
     for (const s of skillsMaster) {
       m[s.skillId] = { name: s.name };
+    }
+    return m;
+  }, []);
+
+  // 兵法書名表示用のマップ（tactics.json を元に構築）
+  const tacticById: Record<string, { name: string }> = useMemo(() => {
+    const m: Record<string, { name: string }> = {};
+    for (const t of tacticsMaster) {
+      m[t.tacticId] = { name: t.name };
     }
     return m;
   }, []);
@@ -111,6 +130,7 @@ export default function CompositionPage() {
   const [activeCompositionIndex, setActiveCompositionIndex] = useState<CompositionIndex | null>(null);
   const [activeSlotIndex, setActiveSlotIndex] = useState<Index3 | null>(null);
   const [activeSkillIndex, setActiveSkillIndex] = useState<0 | 1 | null>(null);
+  const [activeTacticIndex, setActiveTacticIndex] = useState<0 | 1 | 2 | null>(null); // 兵法書スロットのアクティブ状態
   const [activeCompositionSlot, setActiveCompositionSlot] = useState<CompositionIndex | null>(null); // 編成スロット全体のアクティブ状態
 
   // 上下スプリット比率（上:下）。初期は50:50 / 最小35%〜最大75%
@@ -324,6 +344,24 @@ export default function CompositionPage() {
     }
   }
 
+  // 兵法書の割り当て機能
+  function assignTactic(tacticId: string) {
+    if (activeCompositionIndex === null || activeSlotIndex === null || activeTacticIndex === null) return;
+
+    updateComposition(activeCompositionIndex, (c) => {
+      const next = { ...c, slots: c.slots.map((s) => ({ ...s })) };
+      const tactics = (next.slots[activeSlotIndex].tacticIds ?? ["", "", ""]).slice() as [string, string, string];
+
+      // 新規割当
+      tactics[activeTacticIndex] = tacticId;
+
+      next.slots[activeSlotIndex] = { ...next.slots[activeSlotIndex], tacticIds: tactics };
+      return next as Composition;
+    });
+
+    // 割当後もアクティブ維持（連続変更可能）
+  }
+
   // 参照: 03/3.3 - 武将パレットから武将を割当/スワップ
   function assignWarlord(wId: string) {
     if (activeCompositionIndex === null || activeSlotIndex === null) return;
@@ -408,8 +446,14 @@ export default function CompositionPage() {
             setTab("skill");
           }}
           onBackgroundClick={() => {
+            // 兵法書スロットがアクティブの場合は兵法書パレット以外をタップでアクティブ解除
+            if (activeTacticIndex !== null) {
+              setActiveCompositionIndex(null);
+              setActiveSlotIndex(null);
+              setActiveTacticIndex(null);
+            }
             // 戦法スロットがアクティブの場合は戦法パレット以外をタップでアクティブ解除
-            if (activeSkillIndex !== null) {
+            else if (activeSkillIndex !== null) {
               setActiveCompositionIndex(null);
               setActiveSlotIndex(null);
               setActiveSkillIndex(null);
@@ -422,6 +466,14 @@ export default function CompositionPage() {
             }
           }}
           onSelectSlot={(ci, si) => {
+            // 兵法書スロットがアクティブのときは、武将スロットへアクティブを移す
+            if (activeTacticIndex !== null) {
+              setActiveCompositionIndex(ci);
+              setActiveSlotIndex(si);
+              setActiveTacticIndex(null);
+              setTab("warlord");
+              return;
+            }
             // 戦法スロットがアクティブのときは、武将スロットへアクティブを移す
             if (activeSkillIndex !== null) {
               setActiveCompositionIndex(ci);
@@ -466,6 +518,30 @@ export default function CompositionPage() {
           onClearSlot={(ci, si) => {
             clearSlot(ci, si);
           }}
+          activeTacticIndex={activeTacticIndex}
+          onSelectTacticSlot={(ci, si, tk) => {
+            // 同じ兵法書スロットを再度タップした場合はアクティブ解除
+            if (ci === activeCompositionIndex && si === activeSlotIndex && tk === activeTacticIndex) {
+              setActiveCompositionIndex(null);
+              setActiveSlotIndex(null);
+              setActiveTacticIndex(null);
+              return;
+            }
+
+            // 同じ武将内の兵法書スロット間のタップは、アクティブスロット変更のみ
+            if (ci === activeCompositionIndex && si === activeSlotIndex && activeTacticIndex !== null) {
+              setActiveTacticIndex(tk);
+              return;
+            }
+
+            // 異なる武将または異なるスロットの場合はスワップ（将来実装）
+            // 現在は新規割当のみ
+            setActiveCompositionIndex(ci);
+            setActiveSlotIndex(si);
+            setActiveTacticIndex(tk);
+            setTab("tactics");
+          }}
+          tacticById={tacticById}
           compositionNames={[compositions[0].name, compositions[1].name, compositions[2].name]}
           onEditCompositionName={onEditCompositionName}
           activeCompositionSlot={activeCompositionSlot}
@@ -509,7 +585,14 @@ export default function CompositionPage() {
                 />
               </div>
             )}
-            {tab !== "warlord" && <div className="p-3 text-sm text-gray-500">このタブはMVPで後続対応</div>}
+            {tab === "tactics" && (
+              <div onClick={(e) => e.stopPropagation()}>
+                <TacticsPalette
+                  tactics={TACTICS_LIST_FOR_PALETTE as any}
+                  onSelectTactic={(id) => assignTactic(id)}
+                />
+              </div>
+            )}
           </div>
         </Suspense>
       </div>

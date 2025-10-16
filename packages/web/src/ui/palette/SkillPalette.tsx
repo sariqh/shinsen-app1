@@ -136,6 +136,16 @@ const SKILL_DATA: { id: string; name: string; type: string; owned: boolean }[] =
 const TYPE_LABELS = ["兵種", "パッシブ", "突撃", "陣法", "指揮", "アクティブ"] as const;
 const TYPE_SHORT_LABELS = ["兵", "パ", "突", "陣", "指", "ア"] as const;
 
+// 戦法タイプ別の背景色（明度調整後）
+const TYPE_COLORS = [
+  "#8053A2", // 兵種
+  "#3F6B4E", // パッシブ
+  "#B48D36", // 突撃
+  "#6E4A81", // 陣法
+  "#2F5C82", // 指揮
+  "#9A3C35", // アクティブ
+] as const;
+
 export function SkillPalette({ skills = SKILL_DATA, onPick }: Props) {
   const MAX_COLS = 6; // 1段最大6マス
   
@@ -164,7 +174,7 @@ export function SkillPalette({ skills = SKILL_DATA, onPick }: Props) {
           >
             <div className="py-2 px-1">
               <div className="grid gap-[4px]" aria-label="skill-palette"
-                style={{ gridTemplateColumns: `1ch repeat(${MAX_COLS}, 6ch)` }}
+                style={{ gridTemplateColumns: `2ch repeat(${MAX_COLS}, 6ch)` }}
               >
                 {byType.map((typeSkills, typeIndex) => {
                   if (typeSkills.length === 0) return null;
@@ -177,23 +187,29 @@ export function SkillPalette({ skills = SKILL_DATA, onPick }: Props) {
 
                   return (
                     <>
+                      {/* 左端：種類ヘッダ（全行にまたがる） */}
+                      <div 
+                        key={`hdr-${typeIndex}`}
+                        className="flex items-center justify-center"
+                        style={{ gridRow: `span ${rows}` }}
+                      >
+                        <div
+                          className="flex items-center justify-center text-[11px] font-medium rounded text-white"
+                          style={{ 
+                            width: "2ch",
+                            height: `${rows * 24}px`, // 20px + 4px gap
+                            writingMode: "vertical-rl",
+                            textOrientation: "upright",
+                            backgroundColor: TYPE_COLORS[typeIndex],
+                          }}
+                        >
+                          {TYPE_LABELS[typeIndex]}
+                        </div>
+                      </div>
+
+                      {/* 右側：戦法マス */}
                       {chunks.map((chunk, rowIdx) => (
                         <>
-                          {/* 左端：種類ヘッダ（最初の段のみ表示） */}
-                          <div key={`hdr-${typeIndex}-${rowIdx}`} className="flex items-center justify-center">
-                            {rowIdx === 0 ? (
-                              <div
-                                className="h-[20px] flex items-center justify-center text-[11px] font-medium rounded bg-gray-600 text-white"
-                                style={{ width: "1ch" }}
-                              >
-                                {TYPE_SHORT_LABELS[typeIndex]}
-                              </div>
-                            ) : (
-                              <div className="h-[20px]" />
-                            )}
-                          </div>
-
-                          {/* 右側：戦法 6 列まで */}
                           {Array.from({ length: MAX_COLS }).map((_, col) => {
                             const skill = chunk[col];
                             if (!skill) {

@@ -67,25 +67,23 @@ export function WarlordPalette({ warlords, onPick, ownedWarlords = {} }: Props) 
 
                   return (
                     <>
+                      {/* 左端：陣営ヘッダ（自陣営の行数分にまたがる） */}
+                      <div
+                        key={`hdr-${campIndex}`}
+                        className="flex items-center justify-center"
+                        style={{ gridRow: `span ${rows}` }}
+                      >
+                        <div
+                          className={`flex items-center justify-center text-[11px] font-medium rounded ${BG_CLASSES[campIndex as Camp][5]} ${campIndex === 3 ? "text-black" : "text-white"}`}
+                          style={{ width: "2ch", height: `${rows * 24}px` }}
+                        >
+                          {CAMP_LABELS[campIndex]}
+                        </div>
+                      </div>
+
+                      {/* 右側：武将 7 列まで */}
                       {chunks.map((chunk, rowIdx) => (
                         <>
-                          {/* 左端：陣営ヘッダ（最初の段のみ表示） */}
-                          <div key={`hdr-${campIndex}-${rowIdx}`} className="flex items-center justify-center">
-                            {rowIdx === 0 ? (
-                              <div
-                                className={`h-[20px] flex items-center justify-center text-[11px] font-medium rounded ${
-                                  BG_CLASSES[campIndex as Camp][5]
-                                } ${campIndex === 3 ? "text-black" : "text-white"}`}
-                                style={{ width: "2ch" }}
-                              >
-                                {CAMP_LABELS[campIndex]}
-                              </div>
-                            ) : (
-                              <div className="h-[20px]" />
-                            )}
-                          </div>
-
-                          {/* 右側：武将 7 列まで */}
                           {Array.from({ length: MAX_COLS }).map((_, col) => {
                             const warlord = chunk[col];
                             if (!warlord) {

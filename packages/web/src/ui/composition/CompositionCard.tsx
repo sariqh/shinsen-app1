@@ -30,7 +30,10 @@ type Props = {
   onClearSlot?: (i: Index3) => void; // 参照: 03/3.5 - スロットクリア
   activeSkillIndex?: 0 | 1;
   onSelectSkillSlot?: (slotIndex: Index3, skillIndex: 0 | 1) => void;
+  activeTacticIndex?: 0 | 1 | 2;
+  onSelectTacticSlot?: (slotIndex: Index3, tacticIndex: 0 | 1 | 2) => void;
   skillById?: Record<string, { name: string }>; // 戦法名表示用
+  tacticById?: Record<string, { name: string }>; // 兵法書名表示用
   onEditTitle?: () => void; // 編成名編集
   isCompositionActive?: boolean; // 編成スロット全体がアクティブか
   onSelectComposition?: () => void; // 編成スロット選択
@@ -38,7 +41,7 @@ type Props = {
 
 
 
-export function CompositionCard({ title, composition, warlordById, ownedWarlords = {}, activeSlotIndex, onSelectSlot, onClearSlot, activeSkillIndex, onSelectSkillSlot, skillById = {}, onEditTitle, isCompositionActive = false, onSelectComposition }: Props) {
+export function CompositionCard({ title, composition, warlordById, ownedWarlords = {}, activeSlotIndex, onSelectSlot, onClearSlot, activeSkillIndex, onSelectSkillSlot, activeTacticIndex, onSelectTacticSlot, skillById = {}, tacticById = {}, onEditTitle, isCompositionActive = false, onSelectComposition }: Props) {
 
   return (
     <div className={`w-full bg-white border border-gray-300 rounded shadow-sm ${isCompositionActive ? "ring-2 ring-yellow-400" : ""}`}>
@@ -150,15 +153,23 @@ export function CompositionCard({ title, composition, warlordById, ownedWarlords
                 {/* 兵法書スロット x3（横並び） */}
                 <div className="grid grid-cols-3 gap-0">
                   {[0, 1, 2].map((k) => (
-                    <div
+                    <button
                       key={k}
-                      className={`h-3.5 w-[3ch] mx-auto flex items-center justify-center text-[9px] bg-gray-50 text-gray-400 px-0.5 ${
-                        k < 2 ? "border-r border-gray-300" : ""
-                      }`}
-                      aria-disabled
+                      className={`h-3.5 w-[3ch] mx-auto flex items-center justify-center text-[9px] px-0.5 transition-colors ${
+                        activeSlotIndex === idx && activeTacticIndex === (k as 0|1|2) ? "bg-yellow-100 text-gray-800" : "bg-gray-50 text-gray-400"
+                      } ${k < 2 ? "border-r border-gray-300" : ""}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelectTacticSlot?.(idx, k as 0 | 1 | 2);
+                      }}
+                      aria-pressed={activeSlotIndex === idx && activeTacticIndex === (k as 0|1|2)}
                     >
-                      <span className="truncate">兵</span>
-                    </div>
+                      <span className="truncate">
+                        {slot?.tacticIds?.[k] && tacticById[slot.tacticIds[k]]
+                          ? tacticById[slot.tacticIds[k]].name
+                          : "兵"}
+                      </span>
+                    </button>
                   ))}
                 </div>
               </div>

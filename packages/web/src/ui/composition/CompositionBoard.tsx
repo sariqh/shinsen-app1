@@ -18,14 +18,17 @@ type Props = {
   onBackgroundClick?: () => void;
   activeSkillIndex?: 0 | 1 | null;
   onSelectSkillSlot?: (compositionIndex: CompositionIndex, slotIndex: Index3, skillIndex: 0 | 1) => void;
+  activeTacticIndex?: 0 | 1 | 2 | null;
+  onSelectTacticSlot?: (compositionIndex: CompositionIndex, slotIndex: Index3, tacticIndex: 0 | 1 | 2) => void;
   skillById?: Record<string, { name: string }>;
+  tacticById?: Record<string, { name: string }>;
   compositionNames: [string, string, string]; // 編成名
   onEditCompositionName?: (compositionIndex: CompositionIndex) => void; // 編成名編集
   activeCompositionSlot?: CompositionIndex | null; // 編成スロット全体がアクティブか
   onSelectCompositionSlot?: (compositionIndex: CompositionIndex) => void; // 編成スロット選択
 };
 
-export function CompositionBoard({ compositions, warlordById, ownedWarlords, activeCompositionIndex, activeSlotIndex, onSelectSlot, onClearSlot, onBackgroundClick, activeSkillIndex, onSelectSkillSlot, skillById, compositionNames, onEditCompositionName, activeCompositionSlot, onSelectCompositionSlot }: Props) {
+export function CompositionBoard({ compositions, warlordById, ownedWarlords, activeCompositionIndex, activeSlotIndex, onSelectSlot, onClearSlot, onBackgroundClick, activeSkillIndex, onSelectSkillSlot, activeTacticIndex, onSelectTacticSlot, skillById, tacticById, compositionNames, onEditCompositionName, activeCompositionSlot, onSelectCompositionSlot }: Props) {
   return (
     <div className="w-full h-full border rounded bg-white overflow-hidden relative">
       <TransformWrapper 
@@ -56,7 +59,10 @@ export function CompositionBoard({ compositions, warlordById, ownedWarlords, act
                       activeSlotIndex={activeCompositionIndex === ci && activeSlotIndex !== null ? activeSlotIndex : undefined}
                       activeSkillIndex={activeCompositionIndex === ci && activeSkillIndex !== null ? activeSkillIndex : undefined}
                       onSelectSkillSlot={onSelectSkillSlot ? (si, sk) => onSelectSkillSlot(ci as CompositionIndex, si, sk) : undefined}
+                      activeTacticIndex={activeCompositionIndex === ci && activeTacticIndex !== null ? activeTacticIndex : undefined}
+                      onSelectTacticSlot={onSelectTacticSlot ? (si, tk) => onSelectTacticSlot(ci as CompositionIndex, si, tk) : undefined}
                       skillById={skillById}
+                      tacticById={tacticById}
                       onSelectSlot={(si) => onSelectSlot(ci as CompositionIndex, si)}
                       onClearSlot={onClearSlot ? (si) => onClearSlot(ci as CompositionIndex, si) : undefined}
                       onEditTitle={onEditCompositionName ? () => onEditCompositionName(ci as CompositionIndex) : undefined}
