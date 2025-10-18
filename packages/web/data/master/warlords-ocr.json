@@ -1,0 +1,690 @@
+[
+  {
+    "warlordId": "w_001",
+    "name": "孫尚香",
+    "prefix": null,
+    "fullName": "孫尚香",
+    "aliases": ["孫尚香"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_002", 
+    "name": "張紘",
+    "prefix": null,
+    "fullName": "張紘",
+    "aliases": ["張紘"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_003",
+    "name": "于吉",
+    "prefix": null,
+    "fullName": "于吉",
+    "aliases": ["于吉"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_004",
+    "name": "呂布",
+    "prefix": null,
+    "fullName": "呂布",
+    "aliases": ["呂布"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_sp_001",
+    "name": "龐徳",
+    "prefix": "SP",
+    "fullName": "SP龐徳",
+    "aliases": ["龐徳", "庞德"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_005",
+    "name": "許褚",
+    "prefix": null,
+    "fullName": "許褚",
+    "aliases": ["許褚"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_006",
+    "name": "程昱",
+    "prefix": null,
+    "fullName": "程昱",
+    "aliases": ["程昱"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_007",
+    "name": "荀攸",
+    "prefix": null,
+    "fullName": "荀攸",
+    "aliases": ["荀攸"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_008",
+    "name": "典韋",
+    "prefix": null,
+    "fullName": "典韋",
+    "aliases": ["典韋"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_009",
+    "name": "諸葛亮",
+    "prefix": null,
+    "fullName": "諸葛亮",
+    "aliases": ["諸葛亮"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_010",
+    "name": "関銀屏",
+    "prefix": null,
+    "fullName": "関銀屏",
+    "aliases": ["関銀屏"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_011",
+    "name": "趙雲",
+    "prefix": null,
+    "fullName": "趙雲",
+    "aliases": ["趙雲"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_012",
+    "name": "曹操",
+    "prefix": null,
+    "fullName": "曹操",
+    "aliases": ["曹操"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_sp_002",
+    "name": "関羽",
+    "prefix": "SP",
+    "fullName": "SP関羽",
+    "aliases": ["関羽"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_sp_003",
+    "name": "董卓",
+    "prefix": "SP",
+    "fullName": "SP董卓",
+    "aliases": ["董卓"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_013",
+    "name": "太史慈",
+    "prefix": null,
+    "fullName": "太史慈",
+    "aliases": ["太史慈"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_014",
+    "name": "夏侯淵",
+    "prefix": null,
+    "fullName": "夏侯淵",
+    "aliases": ["夏侯淵"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_015",
+    "name": "鄧艾",
+    "prefix": null,
+    "fullName": "鄧艾",
+    "aliases": ["鄧艾"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_016",
+    "name": "程普",
+    "prefix": null,
+    "fullName": "程普",
+    "aliases": ["程普"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_017",
+    "name": "孫策",
+    "prefix": null,
+    "fullName": "孫策",
+    "aliases": ["孫策"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_sp_004",
+    "name": "張梁",
+    "prefix": "SP",
+    "fullName": "SP張梁",
+    "aliases": ["張梁"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_018",
+    "name": "李儒",
+    "prefix": null,
+    "fullName": "李儒",
+    "aliases": ["李儒"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_019",
+    "name": "夏侯惇",
+    "prefix": null,
+    "fullName": "夏侯惇",
+    "aliases": ["夏侯惇"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_sp_005",
+    "name": "諸葛亮",
+    "prefix": "SP",
+    "fullName": "SP諸葛亮",
+    "aliases": ["諸葛亮"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_020",
+    "name": "関興",
+    "prefix": null,
+    "fullName": "関興",
+    "aliases": ["関興"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_021",
+    "name": "馬雲騄",
+    "prefix": null,
+    "fullName": "馬雲騄",
+    "aliases": ["馬雲騄"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_022",
+    "name": "馬忠",
+    "prefix": null,
+    "fullName": "馬忠",
+    "aliases": ["馬忠"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_023",
+    "name": "凌統",
+    "prefix": null,
+    "fullName": "凌統",
+    "aliases": ["凌統"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_024",
+    "name": "陸遜",
+    "prefix": null,
+    "fullName": "陸遜",
+    "aliases": ["陸遜"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_sp_006",
+    "name": "曹真",
+    "prefix": "SP",
+    "fullName": "SP曹真",
+    "aliases": ["曹真"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_025",
+    "name": "郝昭",
+    "prefix": null,
+    "fullName": "郝昭",
+    "aliases": ["郝昭"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_026",
+    "name": "曹仁",
+    "prefix": null,
+    "fullName": "曹仁",
+    "aliases": ["曹仁"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_027",
+    "name": "陸抗",
+    "prefix": null,
+    "fullName": "陸抗",
+    "aliases": ["陸抗"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_028",
+    "name": "周瑜",
+    "prefix": null,
+    "fullName": "周瑜",
+    "aliases": ["周瑜"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_029",
+    "name": "甘寧",
+    "prefix": null,
+    "fullName": "甘寧",
+    "aliases": ["甘寧"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_030",
+    "name": "満寵",
+    "prefix": null,
+    "fullName": "満寵",
+    "aliases": ["満寵"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_031",
+    "name": "法正",
+    "prefix": null,
+    "fullName": "法正",
+    "aliases": ["法正"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_032",
+    "name": "張春華",
+    "prefix": null,
+    "fullName": "張春華",
+    "aliases": ["張春華"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_sp_007",
+    "name": "郭嘉",
+    "prefix": "SP",
+    "fullName": "SP郭嘉",
+    "aliases": ["郭嘉"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_033",
+    "name": "麹義",
+    "prefix": null,
+    "fullName": "麹義",
+    "aliases": ["麹義"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_034",
+    "name": "劉備",
+    "prefix": null,
+    "fullName": "劉備",
+    "aliases": ["劉備"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_sp_008",
+    "name": "袁紹",
+    "prefix": "SP",
+    "fullName": "SP袁紹",
+    "aliases": ["袁紹"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_035",
+    "name": "許攸",
+    "prefix": null,
+    "fullName": "許攸",
+    "aliases": ["許攸"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_036",
+    "name": "沮授",
+    "prefix": null,
+    "fullName": "沮授",
+    "aliases": ["沮授"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_037",
+    "name": "呂玲綺",
+    "prefix": null,
+    "fullName": "呂玲綺",
+    "aliases": ["呂玲綺"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_038",
+    "name": "祝融",
+    "prefix": null,
+    "fullName": "祝融",
+    "aliases": ["祝融"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_039",
+    "name": "兀突骨",
+    "prefix": null,
+    "fullName": "兀突骨",
+    "aliases": ["兀突骨"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_040",
+    "name": "袁紹",
+    "prefix": null,
+    "fullName": "袁紹",
+    "aliases": ["袁紹"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_041",
+    "name": "張角",
+    "prefix": null,
+    "fullName": "張角",
+    "aliases": ["張角"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_co_001",
+    "name": "甄姫",
+    "prefix": "CO",
+    "fullName": "CO甄姫",
+    "aliases": ["甄姫"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_042",
+    "name": "王双",
+    "prefix": null,
+    "fullName": "王双",
+    "aliases": ["王双"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_043",
+    "name": "于禁",
+    "prefix": null,
+    "fullName": "于禁",
+    "aliases": ["于禁"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_044",
+    "name": "楽進",
+    "prefix": null,
+    "fullName": "楽進",
+    "aliases": ["楽進"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_045",
+    "name": "王平",
+    "prefix": null,
+    "fullName": "王平",
+    "aliases": ["王平"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_co_002",
+    "name": "小喬",
+    "prefix": "CO",
+    "fullName": "CO小喬",
+    "aliases": ["小喬"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_046",
+    "name": "高覧",
+    "prefix": null,
+    "fullName": "高覧",
+    "aliases": ["高覧"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_047",
+    "name": "高順",
+    "prefix": null,
+    "fullName": "高順",
+    "aliases": ["高順"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_048",
+    "name": "馬騰",
+    "prefix": null,
+    "fullName": "馬騰",
+    "aliases": ["馬騰"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_049",
+    "name": "文醜",
+    "prefix": null,
+    "fullName": "文醜",
+    "aliases": ["文醜"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_050",
+    "name": "顔良",
+    "prefix": null,
+    "fullName": "顔良",
+    "aliases": ["顔良"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_co_003",
+    "name": "関平",
+    "prefix": "CO",
+    "fullName": "CO関平",
+    "aliases": ["関平"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_051",
+    "name": "伊籍",
+    "prefix": null,
+    "fullName": "伊籍",
+    "aliases": ["伊籍"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_052",
+    "name": "厳顔",
+    "prefix": null,
+    "fullName": "厳顔",
+    "aliases": ["厳顔"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_053",
+    "name": "張苞",
+    "prefix": null,
+    "fullName": "張苞",
+    "aliases": ["張苞"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_054",
+    "name": "陳到",
+    "prefix": null,
+    "fullName": "陳到",
+    "aliases": ["陳到"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_055",
+    "name": "姜維",
+    "prefix": null,
+    "fullName": "姜維",
+    "aliases": ["姜維"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_056",
+    "name": "黄忠",
+    "prefix": null,
+    "fullName": "黄忠",
+    "aliases": ["黄忠"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_057",
+    "name": "呂蒙",
+    "prefix": null,
+    "fullName": "呂蒙",
+    "aliases": ["呂蒙"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_058",
+    "name": "賈詡",
+    "prefix": null,
+    "fullName": "賈詡",
+    "aliases": ["賈詡"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_059",
+    "name": "王異",
+    "prefix": null,
+    "fullName": "王異",
+    "aliases": ["王異"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_060",
+    "name": "公孫瓚",
+    "prefix": null,
+    "fullName": "公孫瓚",
+    "aliases": ["公孫瓚"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_061",
+    "name": "黄月英",
+    "prefix": null,
+    "fullName": "黄月英",
+    "aliases": ["黄月英"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_062",
+    "name": "董卓",
+    "prefix": null,
+    "fullName": "董卓",
+    "aliases": ["董卓"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_063",
+    "name": "魏延",
+    "prefix": null,
+    "fullName": "魏延",
+    "aliases": ["魏延"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_064",
+    "name": "魯粛",
+    "prefix": null,
+    "fullName": "魯粛",
+    "aliases": ["魯粛"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_065",
+    "name": "郭嘉",
+    "prefix": null,
+    "fullName": "郭嘉",
+    "aliases": ["郭嘉"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_066",
+    "name": "関羽",
+    "prefix": null,
+    "fullName": "関羽",
+    "aliases": ["関羽"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_067",
+    "name": "張郃",
+    "prefix": null,
+    "fullName": "張郃",
+    "aliases": ["張郃"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_068",
+    "name": "孫堅",
+    "prefix": null,
+    "fullName": "孫堅",
+    "aliases": ["孫堅"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_co_004",
+    "name": "星彩",
+    "prefix": "CO",
+    "fullName": "CO星彩",
+    "aliases": ["星彩"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_069",
+    "name": "張飛",
+    "prefix": null,
+    "fullName": "張飛",
+    "aliases": ["張飛"],
+    "camp": 3
+  },
+  {
+    "warlordId": "w_070",
+    "name": "孫権",
+    "prefix": null,
+    "fullName": "孫権",
+    "aliases": ["孫権"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_071",
+    "name": "周泰",
+    "prefix": null,
+    "fullName": "周泰",
+    "aliases": ["周泰"],
+    "camp": 2
+  },
+  {
+    "warlordId": "w_sp_009",
+    "name": "荀彧",
+    "prefix": "SP",
+    "fullName": "SP荀彧",
+    "aliases": ["荀彧"],
+    "camp": 1
+  },
+  {
+    "warlordId": "w_sp_010",
+    "name": "馬超",
+    "prefix": "SP",
+    "fullName": "SP馬超",
+    "aliases": ["馬超"],
+    "camp": 4
+  },
+  {
+    "warlordId": "w_072",
+    "name": "鍾会",
+    "prefix": null,
+    "fullName": "鍾会",
+    "aliases": ["鍾会"],
+    "camp": 1
+  }
+]

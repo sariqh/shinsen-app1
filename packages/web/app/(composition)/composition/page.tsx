@@ -399,7 +399,7 @@ export default function CompositionPage() {
   return (
     <div
       ref={containerRef}
-      className="h-[calc(100vh-100px)] grid"
+      className="flex-1 min-h-0 grid"
       style={{ gridTemplateRows: `${Math.round(panelRatio * 100)}% 8px calc(${Math.round((1 - panelRatio) * 100)}% - 8px)` }}
       aria-label="composition-builder"
       role="main"
@@ -567,7 +567,7 @@ export default function CompositionPage() {
           <div className="ml-auto text-xs text-gray-500">iPhone 16 Pro想定 402×874</div>
         </div>
         <Suspense fallback={<div className="p-2 text-sm text-gray-400">Loading...</div>}>
-          <div className="h-[calc(100%-20px)] overflow-hidden">
+          <div className="flex-1 min-h-0 overflow-hidden">
             {tab === "warlord" && (
               <div onClick={(e) => e.stopPropagation()}>
                 <WarlordPalette

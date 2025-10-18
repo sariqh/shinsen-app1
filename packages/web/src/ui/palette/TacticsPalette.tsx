@@ -73,7 +73,7 @@ export function TacticsPalette({ tactics, onSelectTactic }: Props) {
                     const categoryLabel = CATEGORY_LABELS[categoryNum] || "未";
                     
                     const rows = Math.max(1, Math.ceil(categoryTactics.length / MAX_COLS));
-                    const chunks: TacticItem[] = [];
+                    const chunks: TacticItem[][] = [];
                     for (let r = 0; r < rows; r++) {
                       chunks.push(categoryTactics.slice(r * MAX_COLS, r * MAX_COLS + MAX_COLS));
                     }

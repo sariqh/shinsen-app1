@@ -1,9 +1,9 @@
 {
   "pages": {
-    "/(composition)/composition/page": [
+    "/(ocr-test)/ocr-test/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(composition)/composition/page.js"
+      "static/chunks/app/(ocr-test)/ocr-test/page.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
@@ -11,10 +11,10 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/(assets)/assets/page": [
+    "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(assets)/assets/page.js"
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

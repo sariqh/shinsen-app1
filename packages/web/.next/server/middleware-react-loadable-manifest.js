@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}"
+self.__REACT_LOADABLE_MANIFEST="{\"app/(ocr-test)/ocr-test/page.tsx -> @/src/lib/ocr/index\":{\"id\":\"app/(ocr-test)/ocr-test/page.tsx -> @/src/lib/ocr/index\",\"files\":[\"static/chunks/_app-pages-browser_src_lib_ocr_index_ts.js\"]}}"
